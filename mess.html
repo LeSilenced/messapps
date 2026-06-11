@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mess-APPS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f1a;
+            color: #eef2ff;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 8, 15, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 150, 255, 0.25);
+            padding: 0.9rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #0a6cff, #0044cc);
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(10, 108, 255, 0.4);
+        }
+
+        .logo-icon i {
+            font-size: 22px;
+            color: white;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #7ab3ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .signin-btn {
+            background: transparent;
+            border: 1.5px solid #0a6cff;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #7ab3ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(10, 108, 255, 0.05);
+        }
+
+        .signin-btn i {
+            font-size: 1rem;
+        }
+
+        .signin-btn:hover {
+            background-color: #0a6cff;
+            color: white;
+            border-color: #0a6cff;
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(10, 108, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 5rem;
+        }
+
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-badge {
+            background: rgba(10, 108, 255, 0.2);
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #7ab3ff;
+            margin-bottom: 1.5rem;
+            border: 0.5px solid rgba(10, 108, 255, 0.4);
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #ffffff, #7ab3ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #b0c4f0;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #101724;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #eef2ff;
+            text-decoration: none;
+            transition: 0.25s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(10, 108, 255, 0.3);
+        }
+
+        .btn-download i {
+            font-size: 1.5rem;
+        }
+
+        .btn-download.primary {
+            background: linear-gradient(105deg, #0a6cff, #0044cc);
+            box-shadow: 0 12px 20px -8px rgba(10, 108, 255, 0.5);
+            border: none;
+        }
+
+        .btn-download.primary:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(105deg, #1a7cff, #0055dd);
+            box-shadow: 0 18px 25px -8px rgba(10, 108, 255, 0.7);
+        }
+
+        .btn-download.secondary:hover {
+            background: #0f1829;
+            transform: translateY(-2px);
+            border-color: #0a6cff;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 280px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380"><rect width="400" height="380" fill="%23111828" rx="32"/><circle cx="200" cy="160" r="70" fill="%231a2740"/><rect x="120" y="250" width="160" height="30" rx="18" fill="%231f2c48"/><rect x="140" y="300" width="120" height="20" rx="12" fill="%2324355e"/><path d="M260 190 L300 220 L260 250 Z" fill="%230a6cff" opacity="0.8"/><path d="M140 190 L100 220 L140 250 Z" fill="%23004fcc" opacity="0.8"/></svg>') center/contain no-repeat;
+            min-height: 320px;
+            background-size: contain;
+        }
+
+        .features {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: white;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, #0a6cff, #3b82f6);
+            border-radius: 3px;
+        }
+
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #0f1622;
+            padding: 2rem 1.5rem;
+            border-radius: 36px;
+            flex: 1 1 240px;
+            transition: 0.2s;
+            border: 1px solid rgba(10, 108, 255, 0.25);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card i {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #3b82f6, #7ab3ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin: 0.8rem 0 0.5rem;
+            font-weight: 600;
+            color: #eef2ff;
+        }
+
+        .feature-card p {
+            color: #9bb3d1;
+            font-size: 0.9rem;
+        }
+
+        .download-section {
+            background: #0b111c;
+            border-radius: 48px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid rgba(10, 108, 255, 0.4);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .download-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .platform-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .platform-item {
+            background: #111a28;
+            padding: 12px 28px;
+            border-radius: 80px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            transition: 0.2s;
+            cursor: pointer;
+            border: 1px solid #2a3b5a;
+            font-size: 1rem;
+            color: #cbdffc;
+        }
+
+        .platform-item i {
+            font-size: 1.6rem;
+            color: #0a6cff;
+        }
+
+        .platform-item:hover {
+            background: #0f1a2c;
+            border-color: #0a6cff;
+            transform: scale(0.97);
+            color: white;
+        }
+
+        .alert-message {
+            margin-top: 24px;
+            padding: 12px 20px;
+            border-radius: 60px;
+            background: #0e1625;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #7ab3ff;
+            border: 1px solid #1e2a46;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            border-top: 1px solid rgba(10, 108, 255, 0.2);
+            font-size: 0.85rem;
+            color: #7286a3;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .btn-download {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <span class="logo-text">Mess</span>
+        </div>
+        <button class="signin-btn" id="signInBtn">
+            <i class="fas fa-arrow-right-to-bracket"></i> 
+            <span>Войти / Sign In</span>
+        </button>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i>  Только запустились
+            </div>
+            <h1>Мессенджер Mess</h1>
+            <p>Общайтесь с друзьями, делитесь файлами и оставайтесь на связи. Новый мессенджер с фокусом на скорость, приватность и минимализм.</p>
+            <div class="download-buttons">
+                <button class="btn-download secondary" id="downloadAndroidBtn">
+                    <i class="fab fa-android"></i> <span>Скачать для Android</span>
+                </button>
+                <button class="btn-download secondary" id="downloadDesktopBtn">
+                    <i class="fas fa-laptop"></i> <span>Windows</span>
+                </button>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </div>
+
+    <div class="features">
+        <h2 class="section-title">Почему Mess?</h2>
+        <div class="features-grid">
+            <div class="feature-card"><i class="fas fa-bolt"></i><h3>Мгновенные сообщения</h3><p>Высокая скорость доставки, даже при слабом сигнале.</p></div>
+            <div class="feature-card"><i class="fas fa-folder-open"></i><h3>Обмен файлами</h3><p>Отправляйте фото, видео и документы без сжатия.</p></div>
+            <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Приватность по умолчанию</h3><p>Ваши данные под надёжной защитой, никакой слежки.</p></div>
+        </div>
+    </div>
+
+    <div class="download-section">
+        <h2>📲 Скачать Mess</h2>
+        <p>Доступно на основных платформах</p>
+        <div class="platform-btns">
+            <button class="platform-item" id="iosDownloadBtn"><i class="fab fa-apple"></i> iPhone / iPad</button>
+            <button class="platform-item" id="androidDownloadMainBtn"><i class="fab fa-android"></i> Android APK</button>
+            <button class="platform-item" id="windowsDownloadBtn"><i class="fab fa-windows"></i> Windows</button>
+        </div>
+        <div class="alert-message" id="downloadAlert">
+            <i class="fas fa-download"></i> Нажмите на кнопку — начнётся загрузка
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 1rem;">
+        <i class="fas fa-qrcode" style="opacity: 0.5; margin-right: 6px; color:#5f7fbf;"></i> 
+        <span style="font-size: 0.8rem;">Скоро в официальных магазинах приложений</span>
+    </div>
+</main>
+
+<footer>
+    <p>Версия 1.2 | Простота и надёжность</p>
+</footer>
+
+<script>
+    // ==================================================
+    // НАСТРОЙКА: Укажите ПРАВИЛЬНЫЕ пути к вашим файлам
+    // Если файлы лежат в той же папке, что и index.html:
+    const PATH_ANDROID = 'mess.apk';        // имя файла для Android
+    const PATH_WINDOWS = 'mess-setup.exe';  // имя файла для Windows
+    // ==================================================
+
+    function handleDownload(type) {
+        const alertBox = document.getElementById('downloadAlert');
+        const showMessage = (msg, isError = false) => {
+            if (alertBox) {
+                const originalHtml = alertBox.innerHTML;
+                alertBox.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
+                alertBox.style.background = "#0d1424";
+                alertBox.style.color = "#8bb5ff";
+                setTimeout(() => {
+                    alertBox.innerHTML = originalHtml;
+                }, 3000);
+            } else {
+                alert(msg);
+            }
+        };
+
+        if (type === 'ios') {
+            showMessage('📱 Версия для iPhone появится в App Store совсем скоро! Stay tuned.', false);
+        } 
+        else if (type === 'android') {
+            // Скачивание mess.apk ИЗ ЛОКАЛЬНОЙ ПАПКИ
+            try {
+                const link = document.createElement('a');
+                link.href = PATH_ANDROID;
+                link.download = 'mess.apk';  // имя, с которым сохранится файл у пользователя
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showMessage('✅ Загрузка mess.apk началась! Файл из вашей папки.');
+            } catch(e) {
+                showMessage('❌ Ошибка: файл mess.apk не найден в папке с сайтом. Проверьте, что он рядом.', true);
+            }
+        } 
+        else if (type === 'windows') {
+            // Скачивание mess-setup.exe ИЗ ЛОКАЛЬНОЙ ПАПКИ
+            try {
+                const link = document.createElement('a');
+                link.href = PATH_WINDOWS;
+                link.download = 'mess-setup.exe';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showMessage('📦 Загрузка mess-setup.exe (Windows) началась! Файл из вашей папки.');
+            } catch(e) {
+                showMessage('❌ Ошибка: файл mess-setup.exe не найден в папке с сайтом. Проверьте, что он рядом.', true);
+            }
+        }
+    }
+
+    // Назначаем обработчики
+    document.getElementById('iosDownloadBtn')?.addEventListener('click', () => handleDownload('ios'));
+    document.getElementById('androidDownloadMainBtn')?.addEventListener('click', () => handleDownload('android'));
+    document.getElementById('windowsDownloadBtn')?.addEventListener('click', () => handleDownload('windows'));
+    
+    document.getElementById('downloadNowBtn')?.addEventListener('click', () => handleDownload('ios'));
+    document.getElementById('downloadAndroidBtn')?.addEventListener('click', () => handleDownload('android'));
+    
+    // Для Windows (десктоп кнопка)
+    document.getElementById('downloadDesktopBtn')?.addEventListener('click', () => {
+        handleDownload('windows');
+    });
+
+    // Кнопка Sign In
+    const signInButton = document.getElementById('signInBtn');
+    if (signInButton) {
+        signInButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'https://mess-production-de75.up.railway.app/';
+        });
+    }
+
+    // Эффект ripple
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = `
+        @keyframes rippleAnim {
+            from { transform: scale(0); opacity: 0.5; }
+            to { transform: scale(6); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+    
+    const allButtons = document.querySelectorAll('.btn-download, .platform-item, .signin-btn');
+    allButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.backgroundColor = 'rgba(255,255,255,0.2)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'rippleAnim 0.5s linear';
+            ripple.style.width = '40px';
+            ripple.style.height = '40px';
+            ripple.style.left = `${e.offsetX - 20}px`;
+            ripple.style.top = `${e.offsetY - 20}px`;
+            ripple.style.pointerEvents = 'none';
+            const btnStyle = getComputedStyle(btn);
+            if (btnStyle.position === 'static') btn.style.position = 'relative';
+            btn.style.overflow = 'hidden';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 500);
+        });
+    });
+</script>
+</body>
+</html>
